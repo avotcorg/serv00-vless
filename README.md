@@ -1,87 +1,34 @@
-# serv00-vless [注册serv00](https://www.serv00.com/)
-## 使用方法：
+免费空间网站：https://www.serv00.com/
 
-1. 在WWW Websites处建一个nodejs
+1、打开免费提供空间的网站后，注册一个账号，只需要有个真实邮箱能收验证邮件就行，没什么门槛非常方便，注册成功后按收到的邮件里信息登录网站后台面板，面板地址、用户名、密码之类的建议保存一下；
+网站首页.png
+2、利用这个serv00-vless的github项目指导一步步设置好面板里的各项，分别是:
 
-2. 在Ports处，开通一个端口
+点WWW Websites，创建一个网站项目，网站类型选择：node.js
+点Port reservation，开通一个随机端口
+下载此github项目的文件并上传至面板的文件管理自己创建项目的域名文件夹下的public-nodejs目录下
+打开app.js文件，修改UUID和端口并保存好
+serv00-vless的项目地址：https://github.com/zaa555/serv00-vless
+添加node.js.png
+文件管理.png
+3、解析域名a记录，IP为面板的SSL--WWW Websites查看的第1个；
 
-3. 在app.js中修改UUID和端口
-
-4. 把文件上传到迷个文件夹 public-nodejs
-
-5. 在 ssh 中进入30行文件所在的文件夹，输入以下命令：
-
-   `cd /usr/home/XXXXX/domains/XXXXX.serv00.net/public_nodejs`
-
-6. 运行 npm install 来安装依赖项
-
-7. 运行 npm start 启动您的 Node.js 应用程序。
-
-8. 在WWW Websites处的Manage处，点击重启restart。
-
-***建议去CF设回源；其中的两处XXXXX，换成你自己的。***
-
-## 关闭命令窗口保持运行方法：
-
-<font color="red">如果关闭命令窗口任然保持运行，可忽略以下方法。</font>
-
-1. 使用 screen 命令：
-
-   ​	①首先，确保已安装 screen；在serv00无法安装，但后面可以使用screen,可能自带。
-
-   ```
-   	sudo apt-get update
-   	sudo apt-get install screen
-   ```
-
-   ​	②然后，在终端中执行以下命令以创建一个新的 screen 会话：
-   ​	
-
-   ```
-   screen -S mysession
-   ```
-
-   ​	③在 screen 会话中，运行应用程序：
-   ​	
-
-   ```
-   node app.js
-   ```
-
-   ​	④按下 Ctrl + A，然后按下 D 键将 screen 会话分离。
-   ​	⑤关闭终端窗口后，应用程序将继续在后台运行。下次需要重新连接到 screen 会话时，可以使用以下命令：
-   ​	
-
-   ```
-   screen -r mysession
-   ```
-
-2. 使用 tmux 命令：
-
-   ​	①首先，确保已安装 tmux（如果尚未安装）：
-
-   ```
-   	sudo apt-get update
-   	sudo apt-get install tmux
-   ```
-
-   ​	②然后，在终端中执行以下命令以创建一个新的 tmux 会话：
-   ​	
-
-   ```
-   tmux new-session -s mysession
-   ```
-
-   ​	③在 tmux 会话中，运行应用程序
-   ​	
-
-   ```
-   node app.js
-   ```
-
-   ​	④按下 Ctrl + B，然后按下 D 键将 tmux 会话分离。
-   ​	⑤关闭终端窗口后，应用程序将继续在后台运行。下次需要重新连接到 tmux 会话时，可以使用以下命令：
-
-   ```
-   	tmux attach -t mysession
-   ```
+4、SSH登录，用户名密码跟面板一致，连接地址在邮件里可以查看到，端口号默认22
+如果使用电脑WINDOWS系统自带的“终端”连接命令：
+ssh 用户名@连接地址 -p 22
+然后再输密码即成功登录
+注意如果使用finalshell软件连接可能会提示密码错误，先点取消会弹出另一个对话框提示再输入密码即可成功登录
+切换当前工作目录:
+cd /usr/home/自己的用户名/domains/自己的域名/public_nodejs
+先安装依赖项及启动Node.js 应用程序:
+npm install
+npm start
+再在screen会话中，运行应用程序:
+screen -S mysession
+node app.js
+最后按下 Ctrl + A，然后按下 D 键将 screen 会话分离，这样关闭终端窗口后，应用程序将继续在后台运行。
+终端SSH.png
+finalshell.png
+5、打开客户端的代理软件，自定义添加一个vless节点，填入域名、端口号、UUID、伪装域名，传输协议选择ws即可测试该节点直连的真连接是否有延迟返回；
+v2rayN新增vless节点.png
+6、因为这空间距离远网络不好，直连使用效果可能体验非常差，测试过有时油管视频完全打不开无法正常播放，加上中转后效果有所好转，推荐中转网站购买一个最低5元30天111G流量的转发套餐，创建一条转发规则通过中转隧道连接到自己创建的这个vless节点，将代理软件中的地址和端口修改为转发入口的地址和监听端口即可。
