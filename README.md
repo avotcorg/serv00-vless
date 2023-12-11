@@ -10,7 +10,7 @@
 点Port reservation，开通一个随机端口
 下载此github项目的文件并上传至面板的文件管理自己创建项目的域名文件夹下的public-nodejs目录下
 打开app.js文件，修改UUID和端口并保存好
-serv00-vless的项目地址：https://github.com/zaa555/serv00-vless
+serv00-vless的项目地址：https://github.com/avotcorg/serv00-vless/
 添加node.js.png
 文件管理.png
 
